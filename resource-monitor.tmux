@@ -27,12 +27,12 @@ export RM_MEM_FORMAT="$mem_format"
 export RM_SEPARATOR="$separator"
 
 if [ "$enabled" = "1" ]; then
-    tmux set-option -g status-interval "$interval"
-    tmux set-option -g status-right "#(bash ${SCRIPT_DIR}/scripts/resource-monitor.sh)"
+  tmux set-option -g status-interval "$interval"
+  tmux set-option -g status-right "#(bash ${SCRIPT_DIR}/scripts/resource-monitor.sh)"
 fi
 
 # Toggle keybinding: prefix + M
 tmux bind-key M if-shell \
-    "[ \"$(tmux show-option -gqv @resource_monitor_enabled 2>/dev/null || echo '1')\" = '1' ]" \
-    "set-option -g @resource_monitor_enabled 0; set-option -g status-right ''; display-message 'Resource monitor: OFF'" \
-    "set-option -g @resource_monitor_enabled 1; set-option -g status-right \"#(bash ${SCRIPT_DIR}/scripts/resource-monitor.sh)\"; display-message 'Resource monitor: ON'"
+  "[ \"$(tmux show-option -gqv @resource_monitor_enabled 2>/dev/null || echo '1')\" = '1' ]" \
+  "set-option -g @resource_monitor_enabled 0; set-option -g status-right ''; display-message 'Resource monitor: OFF'" \
+  "set-option -g @resource_monitor_enabled 1; set-option -g status-right \"#(bash ${SCRIPT_DIR}/scripts/resource-monitor.sh)\"; display-message 'Resource monitor: ON'"
